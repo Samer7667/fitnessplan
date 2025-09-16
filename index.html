@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +13,7 @@
             --dark-color: #2c3e50;
             --success-color: #27ae60;
             --rest-day-color: #7f8c8d;
+            --warning-color: #f39c12;
         }
         
         * {
@@ -29,6 +30,7 @@
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             color: #333;
             line-height: 1.6;
+            min-height: 100vh;
         }
         
         .container {
@@ -75,6 +77,8 @@
             display: block;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             border: 5px solid white;
+            height: 250px;
+            object-fit: cover;
         }
         
         .week-plan {
@@ -91,6 +95,8 @@
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         
         .day-card:hover {
@@ -117,6 +123,12 @@
             border-bottom: 1px dashed rgba(255,255,255,0.2);
         }
         
+        .day-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
         .complete-btn {
             background-color: var(--success-color);
             color: white;
@@ -125,7 +137,7 @@
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
-            width: 100%;
+            flex: 1;
             transition: background-color 0.3s;
         }
         
@@ -133,13 +145,33 @@
             background-color: #219653;
         }
         
+        .reset-day-btn {
+            background-color: var(--warning-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            flex: 1;
+            transition: background-color 0.3s;
+            display: none;
+        }
+        
+        .reset-day-btn:hover {
+            background-color: #e67e22;
+        }
+        
         .completed {
             background-color: var(--rest-day-color);
         }
         
         .completed .complete-btn {
-            background-color: #95a5a6;
-            cursor: not-allowed;
+            display: none;
+        }
+        
+        .completed .reset-day-btn {
+            display: block;
         }
         
         .progress-section {
@@ -166,31 +198,6 @@
             transition: width 0.5s ease;
         }
         
-        .calendar-export {
-            text-align: center;
-            margin-top: 30px;
-            padding: 20px;
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-            border-radius: 10px;
-        }
-        
-        .export-btn {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin: 10px;
-            transition: background-color 0.3s;
-        }
-        
-        .export-btn:hover {
-            background-color: #2980b9;
-        }
-        
         .motivation-text {
             text-align: center;
             font-style: italic;
@@ -208,6 +215,14 @@
             
             .header h1 {
                 font-size: 2rem;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .day-actions {
+                flex-direction: column;
             }
         }
         
@@ -230,6 +245,50 @@
             transform: translateX(0);
             opacity: 1;
         }
+        
+        .notification.error {
+            background-color: var(--secondary-color);
+        }
+        
+        .reset-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #fffcdc 0%, #d9a7c7 100%);
+            border-radius: 10px;
+        }
+        
+        .reset-btn {
+            background-color: var(--warning-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s;
+        }
+        
+        .reset-btn:hover {
+            background-color: #e67e22;
+            transform: scale(1.05);
+        }
+        
+        .day-completion-date {
+            font-size: 0.85rem;
+            margin-top: 10px;
+            text-align: center;
+            opacity: 0.8;
+        }
+        
+        .auto-reset-info {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -241,9 +300,9 @@
         
         <div class="goal-section">
             <h2>هدفي: أن أصل إلى هذا المستوى</h2>
-            <img src="https://via.placeholder.com/400x300?text=صورة+هدفي" alt="صورة هدفي" class="goal-image" id="goalImage">
+            <img src="https://via.placeholder.com/400x250?text=صورة+هدفي+التدريبي" alt="صورة هدفي" class="goal-image" id="goalImage">
             <input type="file" id="imageUpload" accept="image/*" style="display: none;">
-            <button onclick="document.getElementById('imageUpload').click()" class="export-btn">تغيير الصورة</button>
+            <button onclick="document.getElementById('imageUpload').click()" class="reset-btn">تغيير الصورة</button>
             <p>كل يوم أقترب أكثر من هدفي 💪</p>
         </div>
         
@@ -256,13 +315,21 @@
                     <li>ضغط مثلثي: 3x8-12</li>
                     <li>تمارين رسغ: 4x12-15</li>
                 </ul>
-                <button class="complete-btn" onclick="completeDay('day1')">أكد إنجازي لهذا اليوم</button>
+                <div class="day-actions">
+                    <button class="complete-btn" onclick="completeDay('day1')">أكد إنجازي</button>
+                    <button class="reset-day-btn" onclick="resetDay('day1')">إعادة</button>
+                </div>
+                <div class="day-completion-date" id="day1-date"></div>
             </div>
             
             <div class="day-card rest-day" id="day2">
                 <h3>الثلاثاء (راحة)</h3>
                 <p>استشفاء وتغذية مناسبة</p>
-                <button class="complete-btn" onclick="completeDay('day2')">أكد إنجازي لهذا اليوم</button>
+                <div class="day-actions">
+                    <button class="complete-btn" onclick="completeDay('day2')">أكد إنجازي</button>
+                    <button class="reset-day-btn" onclick="resetDay('day2')">إعادة</button>
+                </div>
+                <div class="day-completion-date" id="day2-date"></div>
             </div>
             
             <div class="day-card" id="day3">
@@ -273,13 +340,21 @@
                     <li>مطرقة: 4x8-12</li>
                     <li>حمل دلوين: 4x40-60ث</li>
                 </ul>
-                <button class="complete-btn" onclick="completeDay('day3')">أكد إنجازي لهذا اليوم</button>
+                <div class="day-actions">
+                    <button class="complete-btn" onclick="completeDay('day3')">أكد إنجازي</button>
+                    <button class="reset-day-btn" onclick="resetDay('day3')">إعادة</button>
+                </div>
+                <div class="day-completion-date" id="day3-date"></div>
             </div>
             
             <div class="day-card rest-day" id="day4">
                 <h3>الخميس (راحة)</h3>
                 <p>استشفاء وتغذية مناسبة</p>
-                <button class="complete-btn" onclick="completeDay('day4')">أكد إنجازي لهذا اليوم</button>
+                <div class="day-actions">
+                    <button class="complete-btn" onclick="completeDay('day4')">أكد إنجازي</button>
+                    <button class="reset-day-btn" onclick="resetDay('day4')">إعادة</button>
+                </div>
+                <div class="day-completion-date" id="day4-date"></div>
             </div>
             
             <div class="day-card" id="day5">
@@ -290,19 +365,31 @@
                     <li>جهاز قبضة (ثقيل): 5x3-5</li>
                     <li>ضغط بأطراف الأصابع: 3xحتى الفشل</li>
                 </ul>
-                <button class="complete-btn" onclick="completeDay('day5')">أكد إنجازي لهذا اليوم</button>
+                <div class="day-actions">
+                    <button class="complete-btn" onclick="completeDay('day5')">أكد إنجازي</button>
+                    <button class="reset-day-btn" onclick="resetDay('day5')">إعادة</button>
+                </div>
+                <div class="day-completion-date" id="day5-date"></div>
             </div>
             
             <div class="day-card" id="day6">
                 <h3>السبت (نشاط خفيف)</h3>
                 <p>مشي خفيف أو تمارين مرونة</p>
-                <button class="complete-btn" onclick="completeDay('day6')">أكد إنجازي لهذا اليوم</button>
+                <div class="day-actions">
+                    <button class="complete-btn" onclick="completeDay('day6')">أكد إنجازي</button>
+                    <button class="reset-day-btn" onclick="resetDay('day6')">إعادة</button>
+                </div>
+                <div class="day-completion-date" id="day6-date"></div>
             </div>
             
             <div class="day-card rest-day" id="day7">
                 <h3>الأحد (راحة)</h3>
                 <p>استعداد لأسبوع جديد من التحدي</p>
-                <button class="complete-btn" onclick="completeDay('day7')">أكد إنجازي لهذا اليوم</button>
+                <div class="day-actions">
+                    <button class="complete-btn" onclick="completeDay('day7')">أكد إنجازي</button>
+                    <button class="reset-day-btn" onclick="resetDay('day7')">إعادة</button>
+                </div>
+                <div class="day-completion-date" id="day7-date"></div>
             </div>
         </div>
         
@@ -312,6 +399,7 @@
                 <div class="progress-fill" id="progressFill"></div>
             </div>
             <p id="progressText">0% من الأسبوع مكتمل</p>
+            <p id="resetInfo" class="auto-reset-info"></p>
         </div>
         
         <div class="motivation-text">
@@ -320,11 +408,10 @@
             <p>"النجاح هو مجموع الجهود الصغيرة التي تتكرر يومياً" - روبرت كولير</p>
         </div>
         
-        <div class="calendar-export">
-            <h2>حفظ الإنجاز في التقويم</h2>
-            <p>بعد إكمال التمارين، يمكنك حفظ إنجازك في تقويم هاتفك</p>
-            <button class="export-btn" onclick="exportToCalendar()">حفظ الإنجاز في التقويم</button>
-            <p>سيتم حفظ ملف يمكنك استيراده لتقويم هاتفك أو حاسوبك</p>
+        <div class="reset-section">
+            <h2>بدء أسبوع جديد</h2>
+            <p>يمكنك مسح تقدم هذا الأسبوع والبدء من جديد</p>
+            <button class="reset-btn" onclick="resetProgress()">بدء أسبوع جديد</button>
         </div>
     </div>
 
@@ -335,6 +422,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadProgress();
             setupImageUpload();
+            checkAutoReset();
         });
         
         // إعداد رفع الصورة
@@ -349,6 +437,7 @@
                     reader.onload = function(event) {
                         goalImage.src = event.target.result;
                         localStorage.setItem('goalImage', event.target.result);
+                        showNotification('تم تغيير صورة الهدف بنجاح!');
                     }
                     reader.readAsDataURL(file);
                 }
@@ -364,15 +453,53 @@
         // إكمال يوم
         function completeDay(dayId) {
             const dayElement = document.getElementById(dayId);
+            const completedDays = JSON.parse(localStorage.getItem('completedDays') || '{}');
+            
+            // إذا كان اليوم مكتملاً بالفعل، لا تفعل شيئاً
+            if (completedDays[dayId]) {
+                showNotification('لقد أكملت هذا اليوم مسبقاً!', 'error');
+                return;
+            }
+            
             dayElement.classList.add('completed');
             
-            const today = new Date().toLocaleDateString('ar-EG');
-            const completedDays = JSON.parse(localStorage.getItem('completedDays') || '{}');
-            completedDays[dayId] = today;
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('ar-EG', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            completedDays[dayId] = {
+                date: today.toISOString(),
+                displayDate: dateStr
+            };
+            
             localStorage.setItem('completedDays', JSON.stringify(completedDays));
+            localStorage.setItem('lastCompletion', today.toISOString());
+            
+            // عرض تاريخ الإكمال
+            document.getElementById(dayId + '-date').textContent = 'أكملت في: ' + dateStr;
             
             updateProgress();
             showNotification('تم تأكيد إنجازك لهذا اليوم!');
+        }
+        
+        // إعادة تعيين يوم معين
+        function resetDay(dayId) {
+            const dayElement = document.getElementById(dayId);
+            const completedDays = JSON.parse(localStorage.getItem('completedDays') || '{}');
+            
+            if (completedDays[dayId]) {
+                delete completedDays[dayId];
+                localStorage.setItem('completedDays', JSON.stringify(completedDays));
+                
+                dayElement.classList.remove('completed');
+                document.getElementById(dayId + '-date').textContent = '';
+                
+                updateProgress();
+                showNotification('تم إعادة تعيين اليوم بنجاح');
+            }
         }
         
         // تحميل التقدم المحفوظ
@@ -382,6 +509,7 @@
             for (const dayId in completedDays) {
                 if (document.getElementById(dayId)) {
                     document.getElementById(dayId).classList.add('completed');
+                    document.getElementById(dayId + '-date').textContent = 'أكملت في: ' + completedDays[dayId].displayDate;
                 }
             }
             
@@ -400,75 +528,59 @@
                 Math.round(progressPercent) + '% من الأسبوع مكتمل (' + completedCount + '/7 أيام)';
         }
         
-        // تصدير إلى التقويم
-        function exportToCalendar() {
-            const completedDays = JSON.parse(localStorage.getItem('completedDays') || '{}');
-            
-            if (Object.keys(completedDays).length === 0) {
-                showNotification('لم تكمل أي أيام بعد!', 'error');
-                return;
-            }
-            
-            // إنشاء محتوى ملف ICS
-            let icsContent = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//hacksw/handcal//NONSGML v1.0//AR\n";
-            
-            for (const [dayId, date] of Object.entries(completedDays)) {
-                const dayName = document.querySelector(`#${dayId} h3`).textContent;
+        // إعادة تعيين التقدم
+        function resetProgress() {
+            if (confirm('هل أنت متأكد أنك تريد بدء أسبوع جديد؟ سيتم مسح جميع تقدمك الحالي.')) {
+                localStorage.removeItem('completedDays');
+                localStorage.setItem('lastReset', new Date().toISOString());
                 
-                icsContent += "BEGIN:VEVENT\n";
-                icsContent += "SUMMARY:" + dayName + " - إنجاز تمارين\n";
-                icsContent += "DTSTART;VALUE=DATE:" + formatDateForICS(date) + "\n";
-                icsContent += "DTSTAMP:" + getCurrentICSDate() + "\n";
-                icsContent += "UID:" + generateUID() + "\n";
-                icsContent += "END:VEVENT\n";
+                // إزالة حالة الإكمال من جميع الأيام
+                for (let i = 1; i <= 7; i++) {
+                    const dayElement = document.getElementById('day' + i);
+                    if (dayElement) {
+                        dayElement.classList.remove('completed');
+                        document.getElementById('day' + i + '-date').textContent = '';
+                    }
+                }
+                
+                updateProgress();
+                showNotification('تم بدء أسبوع جديد بنجاح!');
             }
-            
-            icsContent += "END:VCALENDAR";
-            
-            // إنشاء ملف للتحميل
-            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'إنجازات_التمارين.ics';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            showNotification('تم تصدير إنجازاتك إلى ملف التقويم');
         }
         
-        // تنسيق التاريخ لملف ICS
-        function formatDateForICS(dateString) {
-            const date = new Date(dateString);
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}${month}${day}`;
-        }
-        
-        // الحصول على التاريخ الحالي بتنسيق ICS
-        function getCurrentICSDate() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
+        // التحقق من إعادة التعيين التلقائي
+        function checkAutoReset() {
+            const lastReset = localStorage.getItem('lastReset');
+            const resetInfo = document.getElementById('resetInfo');
             
-            return `${year}${month}${day}T${hours}${minutes}${seconds}Z`;
-        }
-        
-        // إنشاء معرف فريد
-        function generateUID() {
-            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+            if (lastReset) {
+                const lastResetDate = new Date(lastReset);
+                const today = new Date();
+                const diffTime = Math.abs(today - lastResetDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                const daysLeft = 7 - diffDays;
+                
+                if (daysLeft > 0) {
+                    resetInfo.textContent = `سيتم إعادة التعيين التلقائي بعد ${daysLeft} يوم`;
+                } else {
+                    resetProgress();
+                    resetInfo.textContent = "تم إعادة التعيين التلقائي لبدء أسبوع جديد";
+                }
+            } else {
+                localStorage.setItem('lastReset', new Date().toISOString());
+                resetInfo.textContent = "سيتم إعادة التعيين التلقائي بعد 7 أيام";
+            }
         }
         
         // عرض الإشعار
         function showNotification(message, type = 'success') {
             const notification = document.getElementById('notification');
             notification.textContent = message;
-            notification.style.backgroundColor = type === 'success' ? '#27ae60' : '#e74c3c';
+            notification.className = 'notification';
+            
+            if (type === 'error') {
+                notification.classList.add('error');
+            }
             
             notification.classList.add('show');
             
