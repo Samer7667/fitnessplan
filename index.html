@@ -15,198 +15,371 @@
             --rest-day-color: #7f8c8d;
             --warning-color: #f39c12;
         }
-        
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
-        
-        body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            direction: rtl;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        body {
+            background-color: #f5f7fa;
             color: #333;
             line-height: 1.6;
-            min-height: 100vh;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 20px;
         }
-        
+
         .header {
             text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--dark-color) 100%);
+            color: white;
+            border-radius: 10px;
             margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid var(--light-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
-        
+
         .header h1 {
-            color: var(--primary-color);
             font-size: 2.5rem;
             margin-bottom: 10px;
         }
-        
+
         .header p {
-            color: #666;
             font-size: 1.2rem;
+            opacity: 0.9;
         }
-        
-        .goal-section {
-            text-align: center;
-            margin-bottom: 40px;
-            padding: 20px;
-            background: linear-gradient(135deg, #ffd3b6 0%, #ffaaa7 100%);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+        .profile-section {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        
-        .goal-image {
-    width: auto;
-    max-width: 100%;
-    max-height: 400px;
-    border-radius: 10px;
-    margin: 20px auto;
-    display: block;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    border: 5px solid white;
-}
-        
+
+        .profile-picture {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: contain; /* تغيير من cover إلى contain */
+            border: 3px solid white;
+            background-color: white; /* إضافة خلفية بيضاء */
+        }
+
+        .profile-upload {
+            background-color: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background-color 0.3s;
+        }
+
+        .profile-upload:hover {
+            background-color: var(--light-color);
+        }
+
+        .week-selector {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .week-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .week-btn:hover {
+            background-color: var(--dark-color);
+        }
+
+        .current-week {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
         .week-plan {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             margin-bottom: 40px;
         }
-        
+
         .day-card {
-            background: var(--primary-color);
-            color: white;
-            padding: 20px;
+            background-color: white;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
             position: relative;
-            overflow: hidden;
         }
-        
+
         .day-card:hover {
             transform: translateY(-5px);
         }
-        
-        .rest-day {
-            background: var(--rest-day-color);
+
+        .day-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
-        
-        .day-card h3 {
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(255,255,255,0.3);
+
+        .day-content {
+            padding: 20px;
         }
-        
+
         .exercise-list {
             list-style-type: none;
+        }
+
+        .exercise-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .exercise-item:last-child {
+            border-bottom: none;
+        }
+
+        .exercise-name {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .exercise-details {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .exercise-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .complete-btn {
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .morning, .evening {
             margin-bottom: 15px;
         }
-        
-        .exercise-list li {
-            padding: 8px 0;
-            border-bottom: 1px dashed rgba(255,255,255,0.2);
+
+        .time-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
         }
-        
-        .day-actions {
+
+        .time-title::before {
+            content: "•";
+            margin-left: 5px;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+        }
+
+        .rest-day .day-header {
+            background-color: var(--rest-day-color);
+        }
+
+        .hand-exercises {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-right: 5px solid var(--accent-color);
+        }
+
+        .hand-exercises h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .hand-exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .hand-exercise-item {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .hand-exercise-item h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .tips-section {
+            background-color: #e8f4fc;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-right: 5px solid var(--accent-color);
+        }
+
+        .tips-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tip-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .achievements {
+            background-color: #fff8e1;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-right: 5px solid var(--warning-color);
+        }
+
+        .achievements h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .achievement-form {
             display: flex;
             gap: 10px;
-            margin-top: 15px;
+            margin-bottom: 20px;
         }
-        
-        .complete-btn {
+
+        .achievement-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .add-achievement {
             background-color: var(--success-color);
             color: white;
             border: none;
             padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
-            font-weight: bold;
-            flex: 1;
-            transition: background-color 0.3s;
         }
-        
-        .complete-btn:hover {
-            background-color: #219653;
+
+        .achievements-list {
+            list-style-type: none;
         }
-        
-        .reset-day-btn {
-            background-color: var(--warning-color);
+
+        .achievement-item {
+            padding: 10px;
+            background-color: white;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .delete-achievement {
+            background-color: var(--secondary-color);
             color: white;
             border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            flex: 1;
-            transition: background-color 0.3s;
-            display: none;
-        }
-        
-        .reset-day-btn:hover {
-            background-color: #e67e22;
-        }
-        
-        .completed {
-            background-color: var(--rest-day-color);
-        }
-        
-        .completed .complete-btn {
-            display: none;
-        }
-        
-        .completed .reset-day-btn {
-            display: block;
-        }
-        
-        .progress-section {
-            background-color: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        
-        .progress-bar {
+            width: 25px;
             height: 25px;
-            background-color: #eee;
-            border-radius: 10px;
-            margin: 15px 0;
-            overflow: hidden;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #3498db, #2ecc71);
+
+        .progress-section {
+            background-color: #e8f5e9;
+            padding: 30px;
             border-radius: 10px;
-            width: 0%;
-            transition: width 0.5s ease;
+            margin-top: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-right: 5px solid var(--success-color);
         }
-        
-        .motivation-text {
+
+        .progress-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
             text-align: center;
-            font-style: italic;
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #fffaf0;
-            border-radius: 10px;
-            border-left: 5px solid var(--secondary-color);
         }
-        
+
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .progress-stat {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .progress-stat h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .progress-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
         @media (max-width: 768px) {
             .week-plan {
                 grid-template-columns: 1fr;
@@ -216,377 +389,558 @@
                 font-size: 2rem;
             }
             
-            .container {
-                padding: 15px;
+            .profile-section {
+                position: static;
+                justify-content: center;
+                margin-bottom: 15px;
             }
             
-            .day-actions {
+            .week-selector {
                 flex-direction: column;
             }
-        }
-        
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            background-color: var(--success-color);
-            color: white;
-            border-radius: 5px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-            transform: translateX(100%);
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-        
-        .notification.show {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        
-        .notification.error {
-            background-color: var(--secondary-color);
-        }
-        
-        .reset-section {
-            text-align: center;
-            margin: 30px 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #fffcdc 0%, #d9a7c7 100%);
-            border-radius: 10px;
-        }
-        
-        .reset-btn {
-            background-color: var(--warning-color);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: bold;
-            margin: 10px;
-            transition: all 0.3s;
-        }
-        
-        .reset-btn:hover {
-            background-color: #e67e22;
-            transform: scale(1.05);
-        }
-        
-        .day-completion-date {
-            font-size: 0.85rem;
-            margin-top: 10px;
-            text-align: center;
-            opacity: 0.8;
-        }
-        
-        .auto-reset-info {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 0.9rem;
-            color: #666;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
+            <div class="profile-section">
+                <!-- تم تغيير مصدر الصورة إلى path_to_your_image.jpg -->
+                <img src="path_to_your_image.jpg" alt="الصورة الشخصية" class="profile-picture" id="profilePicture">
+                <input type="file" id="profileUpload" accept="image/*" style="display: none;">
+                <button class="profile-upload" onclick="document.getElementById('profileUpload').click()">تغيير الصورة</button>
+            </div>
             <h1>خُطتي لتصبح قويًا جدًا</h1>
             <p>هذا موقعي الشخصي لمتابعة تقدمي التدريبي</p>
         </div>
-        
-        <div class="goal-section">
-            <h2>هدفي: أن أصل إلى هذا المستوى</h2>
-            <img src="https://via.placeholder.com/400x250?text=صورة+هدفي+التدريبي" alt="صورة هدفي" class="goal-image" id="goalImage">
-            <input type="file" id="imageUpload" accept="image/*" style="display: none;">
-            <button onclick="document.getElementById('imageUpload').click()" class="reset-btn">تغيير الصورة</button>
-            <p>كل يوم أقترب أكثر من هدفي 💪</p>
+
+        <div class="week-selector">
+            <button class="week-btn" id="prevWeek">الأسبوع السابق</button>
+            <span class="current-week" id="currentWeek">الأسبوع 1</span>
+            <button class="week-btn" id="nextWeek">الأسبوع التالي</button>
+            <button class="week-btn" id="addWeek">إضافة أسبوع جديد</button>
         </div>
-        
+
         <div class="week-plan">
-            <div class="day-card" id="day1">
-                <h3>الاثنين (تمارين الدفع)</h3>
-                <ul class="exercise-list">
-                    <li>ضغط مٌثقل (بحقيبة): 4x6-10</li>
-                    <li>ضغط انحدار: 3x8-12</li>
-                    <li>ضغط مثلثي: 3x8-12</li>
-                    <li>تمارين رسغ: 4x12-15</li>
-                </ul>
-                <div class="day-actions">
-                    <button class="complete-btn" onclick="completeDay('day1')">أكد إنجازي</button>
-                    <button class="reset-day-btn" onclick="resetDay('day1')">إعادة</button>
+            <!-- السبت -->
+            <div class="day-card">
+                <div class="day-header">السبت</div>
+                <div class="day-content">
+                    <div class="morning">
+                        <div class="time-title">الصباح</div>
+                        <ul class="exercise-list">
+                            <li class="exercise-item">
+                                <div>
+                                    <span class="exercise-name">تمارين القوة</span>
+                                    <div class="exercise-details">ضغط، شد، بطن، قرفصاء (5 مجموعات لكل منها)</div>
+                                </div>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                            <li class="exercise-item">
+                                <div>
+                                    <span class="exercise-name">تمارين اليدين والأصابع</span>
+                                    <div class="exercise-details">تمرين قبضة اليد (3 مجموعات × 15 عدة)</div>
+                                </div>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="evening">
+                        <div class="time-title">المساء</div>
+                        <ul class="exercise-list">
+                            <li class="exercise-item">
+                                <span class="exercise-name">تمارين الإطالة والاستشفاء العضلي</span>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="day-completion-date" id="day1-date"></div>
             </div>
-            
-            <div class="day-card rest-day" id="day2">
-                <h3>الثلاثاء (راحة)</h3>
-                <p>استشفاء وتغذية مناسبة</p>
-                <div class="day-actions">
-                    <button class="complete-btn" onclick="completeDay('day2')">أكد إنجازي</button>
-                    <button class="reset-day-btn" onclick="resetDay('day2')">إعادة</button>
+
+            <!-- الأحد -->
+            <div class="day-card">
+                <div class="day-header">الأحد</div>
+                <div class="day-content">
+                    <div class="morning">
+                        <div class="time-title">الصباح</div>
+                        <ul class="exercise-list">
+                            <li class="exercise-item">
+                                <div>
+                                    <span class="exercise-name">الجري المتقطع</span>
+                                    <div class="exercise-details">20 دقيقة (1 دقيقة سريعة، 1 دقيقة مشي)</div>
+                                </div>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="evening">
+                        <div class="time-title">المساء</div>
+                        <ul class="exercise-list">
+                            <li class="exercise-item">
+                                <span class="exercise-name">راحة</span>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                            <li class="exercise-item">
+                                <div>
+                                    <span class="exercise-name">تمارين اليدين والأصابع</span>
+                                    <div class="exercise-details">تمرين شد الإصبع (3 مجموعات × 10 عدة لكل يد)</div>
+                                </div>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="day-completion-date" id="day2-date"></div>
             </div>
-            
-            <div class="day-card" id="day3">
-                <h3>الأربعاء (تمارين السحب)</h3>
-                <ul class="exercise-list">
-                    <li>تمارين شد (بار أو منشفة): 4xأقصى عدد</li>
-                    <li>صف بحقيبة: 4x8-12</li>
-                    <li>مطرقة: 4x8-12</li>
-                    <li>حمل دلوين: 4x40-60ث</li>
-                </ul>
-                <div class="day-actions">
-                    <button class="complete-btn" onclick="completeDay('day3')">أكد إنجازي</button>
-                    <button class="reset-day-btn" onclick="resetDay('day3')">إعادة</button>
+
+            <!-- الاثنين -->
+            <div class="day-card">
+                <div class="day-header">الاثنين</div>
+                <div class="day-content">
+                    <div class="morning">
+                        <div class="time-title">الصباح</div>
+                        <ul class="exercise-list">
+                            <li class="exercise-item">
+                                <div>
+                                    <span class="exercise-name">الجري الطويل</span>
+                                    <div class="exercise-details">5 كم بزمن ثابت</div>
+                                </div>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="evening">
+                        <div class="time-title">المساء</div>
+                        <ul class="exercise-list">
+                            <li class="exercise-item">
+                                <span class="exercise-name">تمارين الإطالة</span>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="day-completion-date" id="day3-date"></div>
             </div>
-            
-            <div class="day-card rest-day" id="day4">
-                <h3>الخميس (راحة)</h3>
-                <p>استشفاء وتغذية مناسبة</p>
-                <div class="day-actions">
-                    <button class="complete-btn" onclick="completeDay('day4')">أكد إنجازي</button>
-                    <button class="reset-day-btn" onclick="resetDay('day4')">إعادة</button>
+
+            <!-- الثلاثاء -->
+            <div class="day-card">
+                <div class="day-header">الثلاثاء</div>
+                <div class="day-content">
+                    <div class="morning">
+                        <div class="time-title">الصباح</div>
+                        <ul class="exercise-list">
+                            <li class="exercise-item">
+                                <div>
+                                    <span class="exercise-name">تمارين القوة</span>
+                                    <div class="exercise-details">ضغط، شد، بطن، قرفصاء (5 مجموعات لكل منها)</div>
+                                </div>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                            <li class="exercise-item">
+                                <div>
+                                    <span class="exercise-name">تمارين اليدين والأصابع</span>
+                                    <div class="exercise-details">تمرين الضغط على كرة التنس (3 مجموعات × 20 عدة)</div>
+                                </div>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="evening">
+                        <div class="time-title">المساء</div>
+                        <ul class="exercise-list">
+                            <li class="exercise-item">
+                                <span class="exercise-name">راحة</span>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="day-completion-date" id="day4-date"></div>
             </div>
-            
-            <div class="day-card" id="day5">
-                <h3>الجمعة (تمارين القبضة)</h3>
-                <ul class="exercise-list">
-                    <li>ضغط عالي التكرار: 5x12-20</li>
-                    <li>ضغط بساعد واحدة: 3x4-8</li>
-                    <li>جهاز قبضة (ثقيل): 5x3-5</li>
-                    <li>ضغط بأطراف الأصابع: 3xحتى الفشل</li>
-                </ul>
-                <div class="day-actions">
-                    <button class="complete-btn" onclick="completeDay('day5')">أكد إنجازي</button>
-                    <button class="reset-day-btn" onclick="resetDay('day5')">إعادة</button>
+
+            <!-- الأربعاء -->
+            <div class="day-card">
+                <div class="day-header">الأربعاء</div>
+                <div class="day-content">
+                    <div class="morning">
+                        <div class="time-title">الصباح</div>
+                        <ul class="exercise-list">
+                            <li class="exercise-item">
+                                <div>
+                                    <span class="exercise-name">الجري السريع</span>
+                                    <div class="exercise-details">سباقات 400م × 5 مع راحة 90 ثانية</div>
+                                </div>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="evening">
+                        <div class="time-title">المساء</div>
+                        <ul class="exercise-list">
+                            <li class="exercise-item">
+                                <span class="exercise-name">تمارين الإطالة</span>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                            <li class="exercise-item">
+                                <div>
+                                    <span class="exercise-name">تمارين اليدين والأصابع</span>
+                                    <div class="exercise-details">تمرين قبضة المعصم (3 مجموعات × 12 عدة)</div>
+                                </div>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="day-completion-date" id="day5-date"></div>
             </div>
-            
-            <div class="day-card" id="day6">
-                <h3>السبت (نشاط خفيف)</h3>
-                <p>مشي خفيف أو تمارين مرونة</p>
-                <div class="day-actions">
-                    <button class="complete-btn" onclick="completeDay('day6')">أكد إنجازي</button>
-                    <button class="reset-day-btn" onclick="resetDay('day6')">إعادة</button>
+
+            <!-- الخميس -->
+            <div class="day-card rest-day">
+                <div class="day-header">الخميس</div>
+                <div class="day-content">
+                    <div class="morning">
+                        <div class="time-title">الصباح</div>
+                        <ul class="exercise-list">
+                            <li class="exercise-item">
+                                <span class="exercise-name">راحة تامة أو سباحة خفيفة</span>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="evening">
+                        <div class="time-title">المساء</div>
+                        <ul class="exercise-list">
+                            <li class="exercise-item">
+                                <span class="exercise-name">راحة</span>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="day-completion-date" id="day6-date"></div>
             </div>
-            
-            <div class="day-card rest-day" id="day7">
-                <h3>الأحد (راحة)</h3>
-                <p>استعداد لأسبوع جديد من التحدي</p>
-                <div class="day-actions">
-                    <button class="complete-btn" onclick="completeDay('day7')">أكد إنجازي</button>
-                    <button class="reset-day-btn" onclick="resetDay('day7')">إعادة</button>
+
+            <!-- الجمعة -->
+            <div class="day-card">
+                <div class="day-header">الجمعة</div>
+                <div class="day-content">
+                    <div class="morning">
+                        <div class="time-title">الصباح</div>
+                        <ul class="exercise-list">
+                            <li class="exercise-item">
+                                <div>
+                                    <span class="exercise-name">الجري الطويل</span>
+                                    <div class="exercise-details">5 كم بزمن أسرع من يوم الاثنين</div>
+                                </div>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="evening">
+                        <div class="time-title">المساء</div>
+                        <ul class="exercise-list">
+                            <li class="exercise-item">
+                                <span class="exercise-name">تمارين الإطالة</span>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                            <li class="exercise-item">
+                                <div>
+                                    <span class="exercise-name">تمارين اليدين والأصابع</span>
+                                    <div class="exercise-details">تمرين مقاومة الأصابع (3 مجموعات × 15 عدة)</div>
+                                </div>
+                                <div class="exercise-actions">
+                                    <button class="complete-btn">✓</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="day-completion-date" id="day7-date"></div>
             </div>
         </div>
-        
+
         <div class="progress-section">
             <h2>تقدمي هذا الأسبوع</h2>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
+            <div class="progress-stats">
+                <div class="progress-stat">
+                    <h3>تمارين مكتملة</h3>
+                    <div class="progress-value" id="completedExercises">0/24</div>
+                </div>
+                <div class="progress-stat">
+                    <h3>نسبة الإنجاز</h3>
+                    <div class="progress-value" id="completionRate">0%</div>
+                </div>
+                <div class="progress-stat">
+                    <h3>أيام متتالية</h3>
+                    <div class="progress-value" id="streakDays">0</div>
+                </div>
             </div>
-            <p id="progressText">0% من الأسبوع مكتمل</p>
-            <p id="resetInfo" class="auto-reset-info"></p>
         </div>
-        
-        <div class="motivation-text">
-            <h3>كلمات تحفيزية</h3>
-            <p>"القوة لا تأتي من المقدرة الجسمانية، بل تأتي من الإرادة التي لا تقهر" - مهاتما غاندي</p>
-            <p>"النجاح هو مجموع الجهود الصغيرة التي تتكرر يومياً" - روبرت كولير</p>
+
+        <div class="hand-exercises">
+            <h2>تمارين تقوية وتضخيم اليدين والأصابع</h2>
+            <div class="hand-exercise-grid">
+                <div class="hand-exercise-item">
+                    <h3>تمرين قبضة اليد</h3>
+                    <p>استخدم أداة تقوية القبضة أو كرة مطاطية. اضغط بقوة لمدة 5 ثوانٍ ثم أطلق. 3 مجموعات × 15 عدة لكل يد.</p>
+                </div>
+                <div class="hand-exercise-item">
+                    <h3>تمرين شد الإصبع</h3>
+                    <p>استخدم رباط مطاطي حول الأصابع وافتحها ضد المقاومة. 3 مجموعات × 10 عدة لكل يد.</p>
+                </div>
+                <div class="hand-exercise-item">
+                    <h3>تمرين الضغط على كرة التنس</h3>
+                    <p>اضغط على كرة التنس بأطراف أصابعك. 3 مجموعات × 20 عدة لكل يد.</p>
+                </div>
+                <div class="hand-exercise-item">
+                    <h3>تمرين قبضة المعصم</h3>
+                    <p>أمسك دمبل خفيف ولف معصمك لأعلى ولأسفل. 3 مجموعات × 12 عدة لكل يد.</p>
+                </div>
+                <div class="hand-exercise-item">
+                    <h3>تمرين مقاومة الأصابع</h3>
+                    <p>استخدم أصابع اليد الأخرى لمقاومة حركة كل إصبع. 3 مجموعات × 15 عدة لكل إصبع.</p>
+                </div>
+                <div class="hand-exercise-item">
+                    <h3>تمرين تعليق الجسم</h3>
+                    <p>علق جسمك على بار لمدة 30-60 ثانية لتقوية قبضة اليد والأصابع.</p>
+                </div>
+            </div>
         </div>
-        
-        <div class="reset-section">
-            <h2>بدء أسبوع جديد</h2>
-            <p>يمكنك مسح تقدم هذا الأسبوع والبدء من جديد</p>
-            <button class="reset-btn" onclick="resetProgress()">بدء أسبوع جديد</button>
+
+        <div class="achievements">
+            <h2>إنجازاتي</h2>
+            <div class="achievement-form">
+                <input type="text" class="achievement-input" placeholder="أضف إنجازك الجديد هنا...">
+                <button class="add-achievement">إضافة</button>
+            </div>
+            <ul class="achievements-list">
+                <li class="achievement-item">
+                    <span>أكملت أول أسبوع تدريبي كامل</span>
+                    <button class="delete-achievement">×</button>
+                </li>
+                <li class="achievement-item">
+                    <span>حققت 20 ضغطة متتالية</span>
+                    <button class="delete-achievement">×</button>
+                </li>
+                <li class="achievement-item">
+                    <span>ركضت 5 كم بدون توقف</span>
+                    <button class="delete-achievement">×</button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tips-section">
+            <h2>نصائح مهمة جدًا للاختبار</h2>
+            <div class="tip-item">
+                <strong>الجرى (اللفة):</strong> هو غالبًا أهم جزء في الاختبار. لا تبدأ بأقصى سرعة، بل احتفظ بخطوة ثابتة وسريعة من البداية حتى النهاية.
+            </div>
+            <div class="tip-item">
+                <strong>الضغط والبطن:</strong> في الاختبار، العدات يجب أن تكون كاملة وصحيحة (نزول كامل للصدر في الضغط، ومسك الركبتين في البطن). لا تهمل في دقة الحركة.
+            </div>
+            <div class="tip-item">
+                <strong>السحب (الشد):</strong> إذا كان ضمن الاختبار، فهو فارق بين المقبول والمميز. ركز عليه.
+            </div>
+            <div class="tip-item">
+                <strong>اليدان والأصابع:</strong> القبضة القوية مهمة للتمارين التي تتعلق بحمل الأوزان أو التسلق.
+            </div>
+            <div class="tip-item">
+                <strong>التنفس:</strong> حافظ على تنفس منتظم خلال التمارين ولا تحبس أنفاسك.
+            </div>
+            <div class="tip-item">
+                <strong>الاستشفاء:</strong> لا تهمل الراحة والتغذية المناسبة، فهما أساسيان لتحقيق التقدم.
+            </div>
         </div>
     </div>
 
-    <div class="notification" id="notification">تم حفظ إنجازك بنجاح!</div>
-
     <script>
-        // تحميل البيانات المحفوظة عند بدء التحميل
-        document.addEventListener('DOMContentLoaded', function() {
-            loadProgress();
-            setupImageUpload();
-            checkAutoReset();
-        });
-        
-        // إعداد رفع الصورة
-        function setupImageUpload() {
-            const imageUpload = document.getElementById('imageUpload');
-            const goalImage = document.getElementById('goalImage');
-            
-            imageUpload.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        goalImage.src = event.target.result;
-                        localStorage.setItem('goalImage', event.target.result);
-                        showNotification('تم تغيير صورة الهدف بنجاح!');
-                    }
-                    reader.readAsDataURL(file);
-                }
-            });
-            
-            // تحميل الصورة المحفوظة إذا وجدت
-            const savedImage = localStorage.getItem('goalImage');
-            if (savedImage) {
-                goalImage.src = savedImage;
-            }
+        // متغيرات التطبيق
+        let currentWeek = 1;
+        let completedExercises = 0;
+        const totalExercises = 24;
+        let streakDays = 0;
+        let lastCompletionDate = null;
+
+        // عناصر DOM
+        const currentWeekElement = document.getElementById('currentWeek');
+        const completedExercisesElement = document.getElementById('completedExercises');
+        const completionRateElement = document.getElementById('completionRate');
+        const streakDaysElement = document.getElementById('streakDays');
+        const profilePicture = document.getElementById('profilePicture');
+        const profileUpload = document.getElementById('profileUpload');
+
+        // تحديث الأسبوع الحالي
+        function updateWeekDisplay() {
+            currentWeekElement.textContent = `الأسبوع ${currentWeek}`;
         }
-        
-        // إكمال يوم
-        function completeDay(dayId) {
-            const dayElement = document.getElementById(dayId);
-            const completedDays = JSON.parse(localStorage.getItem('completedDays') || '{}');
-            
-            // إذا كان اليوم مكتملاً بالفعل، لا تفعل شيئاً
-            if (completedDays[dayId]) {
-                showNotification('لقد أكملت هذا اليوم مسبقاً!', 'error');
-                return;
-            }
-            
-            dayElement.classList.add('completed');
-            
-            const today = new Date();
-            const dateStr = today.toLocaleDateString('ar-EG', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-            
-            completedDays[dayId] = {
-                date: today.toISOString(),
-                displayDate: dateStr
-            };
-            
-            localStorage.setItem('completedDays', JSON.stringify(completedDays));
-            localStorage.setItem('lastCompletion', today.toISOString());
-            
-            // عرض تاريخ الإكمال
-            document.getElementById(dayId + '-date').textContent = 'أكملت في: ' + dateStr;
-            
-            updateProgress();
-            showNotification('تم تأكيد إنجازك لهذا اليوم!');
-        }
-        
-        // إعادة تعيين يوم معين
-        function resetDay(dayId) {
-            const dayElement = document.getElementById(dayId);
-            const completedDays = JSON.parse(localStorage.getItem('completedDays') || '{}');
-            
-            if (completedDays[dayId]) {
-                delete completedDays[dayId];
-                localStorage.setItem('completedDays', JSON.stringify(completedDays));
-                
-                dayElement.classList.remove('completed');
-                document.getElementById(dayId + '-date').textContent = '';
-                
-                updateProgress();
-                showNotification('تم إعادة تعيين اليوم بنجاح');
-            }
-        }
-        
-        // تحميل التقدم المحفوظ
-        function loadProgress() {
-            const completedDays = JSON.parse(localStorage.getItem('completedDays') || '{}');
-            
-            for (const dayId in completedDays) {
-                if (document.getElementById(dayId)) {
-                    document.getElementById(dayId).classList.add('completed');
-                    document.getElementById(dayId + '-date').textContent = 'أكملت في: ' + completedDays[dayId].displayDate;
-                }
-            }
-            
-            updateProgress();
-        }
-        
-        // تحديث شريط التقدم
+
+        // تحديث التقدم
         function updateProgress() {
-            const totalDays = 7;
-            const completedDays = JSON.parse(localStorage.getItem('completedDays') || '{}');
-            const completedCount = Object.keys(completedDays).length;
-            const progressPercent = (completedCount / totalDays) * 100;
+            completedExercisesElement.textContent = `${completedExercises}/${totalExercises}`;
+            const completionRate = Math.round((completedExercises / totalExercises) * 100);
+            completionRateElement.textContent = `${completionRate}%`;
             
-            document.getElementById('progressFill').style.width = progressPercent + '%';
-            document.getElementById('progressText').textContent = 
-                Math.round(progressPercent) + '% من الأسبوع مكتمل (' + completedCount + '/7 أيام)';
-        }
-        
-        // إعادة تعيين التقدم
-        function resetProgress() {
-            if (confirm('هل أنت متأكد أنك تريد بدء أسبوع جديد؟ سيتم مسح جميع تقدمك الحالي.')) {
-                localStorage.removeItem('completedDays');
-                localStorage.setItem('lastReset', new Date().toISOString());
-                
-                // إزالة حالة الإكمال من جميع الأيام
-                for (let i = 1; i <= 7; i++) {
-                    const dayElement = document.getElementById('day' + i);
-                    if (dayElement) {
-                        dayElement.classList.remove('completed');
-                        document.getElementById('day' + i + '-date').textContent = '';
-                    }
+            // تحديث أيام المتابعة المتتالية
+            const today = new Date().toDateString();
+            if (lastCompletionDate !== today) {
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+                if (lastCompletionDate === yesterday.toDateString()) {
+                    streakDays++;
+                } else if (lastCompletionDate !== today) {
+                    streakDays = 1;
                 }
-                
-                updateProgress();
-                showNotification('تم بدء أسبوع جديد بنجاح!');
+                lastCompletionDate = today;
             }
-        }
-        
-        // التحقق من إعادة التعيين التلقائي
-        function checkAutoReset() {
-            const lastReset = localStorage.getItem('lastReset');
-            const resetInfo = document.getElementById('resetInfo');
             
-            if (lastReset) {
-                const lastResetDate = new Date(lastReset);
-                const today = new Date();
-                const diffTime = Math.abs(today - lastResetDate);
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                const daysLeft = 7 - diffDays;
-                
-                if (daysLeft > 0) {
-                    resetInfo.textContent = `سيتم إعادة التعيين التلقائي بعد ${daysLeft} يوم`;
+            streakDaysElement.textContent = streakDays;
+        }
+
+        // إضافة أسبوع جديد
+        function addNewWeek() {
+            currentWeek++;
+            updateWeekDisplay();
+            completedExercises = 0;
+            updateProgress();
+            
+            // إعادة تعليم التمارين على أنها غير مكتملة
+            document.querySelectorAll('.complete-btn').forEach(btn => {
+                btn.textContent = '✓';
+                btn.style.backgroundColor = '';
+            });
+        }
+
+        // تحميل الصورة الشخصية
+        profileUpload.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    profilePicture.src = event.target.result;
+                    localStorage.setItem('profilePicture', event.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // تحميل الصورة المحفوظة إن وجدت
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedProfilePicture = localStorage.getItem('profilePicture');
+            if (savedProfilePicture) {
+                profilePicture.src = savedProfilePicture;
+            }
+            
+            // تحميل التقدم المحفوظ
+            const savedProgress = localStorage.getItem('fitnessProgress');
+            if (savedProgress) {
+                const progress = JSON.parse(savedProgress);
+                completedExercises = progress.completedExercises || 0;
+                streakDays = progress.streakDays || 0;
+                lastCompletionDate = progress.lastCompletionDate || null;
+            }
+            
+            updateProgress();
+        });
+
+        // حفظ التقدم عند الخروج
+        window.addEventListener('beforeunload', function() {
+            const progress = {
+                completedExercises: completedExercises,
+                streakDays: streakDays,
+                lastCompletionDate: lastCompletionDate
+            };
+            localStorage.setItem('fitnessProgress', JSON.stringify(progress));
+        });
+
+        // إضافة مستمعي الأحداث للأزرار
+        document.getElementById('prevWeek').addEventListener('click', function() {
+            if (currentWeek > 1) {
+                currentWeek--;
+                updateWeekDisplay();
+            }
+        });
+
+        document.getElementById('nextWeek').addEventListener('click', function() {
+            currentWeek++;
+            updateWeekDisplay();
+        });
+
+        document.getElementById('addWeek').addEventListener('click', addNewWeek);
+
+        // إضافة مستمعي الأحداث لأزرار إكمال التمارين
+        document.querySelectorAll('.complete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.textContent === '✓') {
+                    this.textContent = '✔';
+                    this.style.backgroundColor = 'var(--success-color)';
+                    completedExercises++;
                 } else {
-                    resetProgress();
-                    resetInfo.textContent = "تم إعادة التعيين التلقائي لبدء أسبوع جديد";
+                    this.textContent = '✓';
+                    this.style.backgroundColor = '';
+                    completedExercises--;
                 }
-            } else {
-                localStorage.setItem('lastReset', new Date().toISOString());
-                resetInfo.textContent = "سيتم إعادة التعيين التلقائي بعد 7 أيام";
+                updateProgress();
+            });
+        });
+
+        // إضافة مستمعي الأحداث للإنجازات
+        document.querySelector('.add-achievement').addEventListener('click', function() {
+            const input = document.querySelector('.achievement-input');
+            const achievementText = input.value.trim();
+            
+            if (achievementText) {
+                const achievementsList = document.querySelector('.achievements-list');
+                const newAchievement = document.createElement('li');
+                newAchievement.className = 'achievement-item';
+                newAchievement.innerHTML = `
+                    <span>${achievementText}</span>
+                    <button class="delete-achievement">×</button>
+                `;
+                
+                newAchievement.querySelector('.delete-achievement').addEventListener('click', function() {
+                    newAchievement.remove();
+                });
+                
+                achievementsList.appendChild(newAchievement);
+                input.value = '';
             }
-        }
-        
-        // عرض الإشعار
-        function showNotification(message, type = 'success') {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.className = 'notification';
-            
-            if (type === 'error') {
-                notification.classList.add('error');
-            }
-            
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
+        });
+
+        // مستمعي الأحداث لحذف الإنجازات
+        document.querySelectorAll('.delete-achievement').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        });
     </script>
 </body>
 </html>
