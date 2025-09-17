@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خطة تضخيم العضلات - متابعة التقدم</title>
+    <title>خطة تضخيم العضلات وزيادة التستوستيرون</title>
     <style>
         :root {
             --primary-color: #2c3e50;
@@ -14,6 +14,7 @@
             --success-color: #27ae60;
             --rest-day-color: #7f8c8d;
             --warning-color: #f39c12;
+            --testosterone-color: #8e44ad;
         }
 
         * {
@@ -66,27 +67,40 @@
         }
 
         .profile-picture {
-            width: 60px;
-            height: 60px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            object-fit: contain; /* تغيير من cover إلى contain */
+            object-fit: cover;
             border: 3px solid white;
-            background-color: white; /* إضافة خلفية بيضاء */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .profile-upload {
             background-color: white;
             color: var(--primary-color);
             border: none;
-            padding: 5px 10px;
+            padding: 8px 15px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             transition: background-color 0.3s;
+            margin-top: 5px;
         }
 
         .profile-upload:hover {
             background-color: var(--light-color);
+        }
+
+        /* تنسيق الصورة المطلوب */
+        .goal-image {
+            width: auto;
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 5px solid white;
         }
 
         .week-selector {
@@ -101,10 +115,11 @@
             background-color: var(--primary-color);
             color: white;
             border: none;
-            padding: 8px 15px;
+            padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            font-size: 1rem;
         }
 
         .week-btn:hover {
@@ -112,9 +127,48 @@
         }
 
         .current-week {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: var(--primary-color);
+            padding: 5px 15px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-tab {
+            padding: 15px 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+            flex: 1;
+            text-align: center;
+        }
+
+        .nav-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .nav-tab:hover:not(.active) {
+            background-color: #f0f0f0;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
         }
 
         .week-plan {
@@ -380,6 +434,108 @@
             color: var(--primary-color);
         }
 
+        /* Testosterone Plan Styles */
+        .testosterone-header {
+            background: linear-gradient(135deg, var(--testosterone-color) 0%, #6c3483 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .testosterone-header h2 {
+            margin: 0;
+            font-size: 2.2em;
+            color: white;
+            border-bottom: none;
+        }
+        
+        .testosterone-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+        }
+        
+        .testosterone-container h3 {
+            color: var(--testosterone-color);
+            border-bottom: 2px solid var(--testosterone-color);
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        
+        .testosterone-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .testosterone-table th, .testosterone-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .testosterone-table th {
+            background-color: var(--testosterone-color);
+            color: white;
+        }
+        
+        .testosterone-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .day-plan {
+            margin-bottom: 30px;
+        }
+        
+        .testosterone-day-title {
+            background-color: var(--testosterone-color);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .testosterone-section {
+            margin: 15px 0;
+        }
+        
+        .testosterone-warning {
+            background-color: #ffe6e6;
+            border-right: 5px solid #ff0000;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .testosterone-tip {
+            background-color: #f4e6ff;
+            border-right: 5px solid var(--testosterone-color);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        
+        .testosterone-btn {
+            display: inline-block;
+            background-color: var(--testosterone-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .testosterone-btn:hover {
+            background-color: #6c3483;
+        }
+
         @media (max-width: 768px) {
             .week-plan {
                 grid-template-columns: 1fr;
@@ -398,6 +554,15 @@
             .week-selector {
                 flex-direction: column;
             }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .profile-picture {
+                width: 80px;
+                height: 80px;
+            }
         }
     </style>
 </head>
@@ -405,13 +570,20 @@
     <div class="container">
         <div class="header">
             <div class="profile-section">
-                <!-- تم تغيير مصدر الصورة إلى path_to_your_image.jpg -->
                 <img src="path_to_your_image.jpg" alt="الصورة الشخصية" class="profile-picture" id="profilePicture">
                 <input type="file" id="profileUpload" accept="image/*" style="display: none;">
                 <button class="profile-upload" onclick="document.getElementById('profileUpload').click()">تغيير الصورة</button>
             </div>
             <h1>خُطتي لتصبح قويًا جدًا</h1>
-            <p>هذا موقعي الشخصي لمتابعة تقدمي التدريبي</p>
+            <p>هذا موقعي الشخصي لمتابعة تقدمي التدريبي وزيادة التستوستيرون الطبيعي</p>
+        </div>
+
+        <!-- تم استبدال الصورة السابقة بالفئة goal-image -->
+        <img src="path_to_your_image.jpg" alt="رجل قوي - الهدف الذي أطمح إليه" class="goal-image">
+
+        <div class="nav-tabs">
+            <div class="nav-tab active" data-target="training-plan">خطة التدريب</div>
+            <div class="nav-tab" data-target="testosterone-plan">خطة زيادة التستوستيرون</div>
         </div>
 
         <div class="week-selector">
@@ -421,366 +593,622 @@
             <button class="week-btn" id="addWeek">إضافة أسبوع جديد</button>
         </div>
 
-        <div class="week-plan">
-            <!-- السبت -->
-            <div class="day-card">
-                <div class="day-header">السبت</div>
-                <div class="day-content">
-                    <div class="morning">
-                        <div class="time-title">الصباح</div>
-                        <ul class="exercise-list">
-                            <li class="exercise-item">
-                                <div>
-                                    <span class="exercise-name">تمارين القوة</span>
-                                    <div class="exercise-details">ضغط، شد، بطن، قرفصاء (5 مجموعات لكل منها)</div>
-                                </div>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                            <li class="exercise-item">
-                                <div>
-                                    <span class="exercise-name">تمارين اليدين والأصابع</span>
-                                    <div class="exercise-details">تمرين قبضة اليد (3 مجموعات × 15 عدة)</div>
-                                </div>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                        </ul>
+        <div class="content-section active" id="training-plan">
+            <div class="week-plan">
+                <!-- السبت -->
+                <div class="day-card">
+                    <div class="day-header">السبت</div>
+                    <div class="day-content">
+                        <div class="morning">
+                            <div class="time-title">الصباح</div>
+                            <ul class="exercise-list">
+                                <li class="exercise-item">
+                                    <div>
+                                        <span class="exercise-name">تمارين القوة</span>
+                                        <div class="exercise-details">ضغط، شد، بطن، قرفصاء (5 مجموعات لكل منها)</div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                                <li class="exercise-item">
+                                    <div>
+                                        <span class="exercise-name">تمارين اليدين والأصابع</span>
+                                        <div class="exercise-details">تمرين قبضة اليد (3 مجموعات × 15 عدة)</div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="evening">
+                            <div class="time-title">المساء</div>
+                            <ul class="exercise-list">
+                                <li class="exercise-item">
+                                    <span class="exercise-name">تمارين الإطالة والاستشفاء العضلي</span>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="evening">
-                        <div class="time-title">المساء</div>
-                        <ul class="exercise-list">
-                            <li class="exercise-item">
-                                <span class="exercise-name">تمارين الإطالة والاستشفاء العضلي</span>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                        </ul>
+                </div>
+
+                <!-- الأحد -->
+                <div class="day-card">
+                    <div class="day-header">الأحد</div>
+                    <div class="day-content">
+                        <div class="morning">
+                            <div class="time-title">الصباح</div>
+                            <ul class="exercise-list">
+                                <li class="exercise-item">
+                                    <div>
+                                        <span class="exercise-name">الجري المتقطع</span>
+                                        <div class="exercise-details">20 دقيقة (1 دقيقة سريعة، 1 دقيقة مشي)</div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="evening">
+                            <div class="time-title">المساء</div>
+                            <ul class="exercise-list">
+                                <li class="exercise-item">
+                                    <span class="exercise-name">راحة</span>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                                <li class="exercise-item">
+                                    <div>
+                                        <span class="exercise-name">تمارين اليدين والأصابع</span>
+                                        <div class="exercise-details">تمرين شد الإصبع (3 مجموعات × 10 عدة لكل يد)</div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الاثنين -->
+                <div class="day-card">
+                    <div class="day-header">الاثنين</div>
+                    <div class="day-content">
+                        <div class="morning">
+                            <div class="time-title">الصباح</div>
+                            <ul class="exercise-list">
+                                <li class="exercise-item">
+                                    <div>
+                                        <span class="exercise-name">الجري الطويل</span>
+                                        <div class="exercise-details">5 كم بزمن ثابت</div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="evening">
+                            <div class="time-title">المساء</div>
+                            <ul class="exercise-list">
+                                <li class="exercise-item">
+                                    <span class="exercise-name">تمارين الإطالة</span>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الثلاثاء -->
+                <div class="day-card">
+                    <div class="day-header">الثلاثاء</div>
+                    <div class="day-content">
+                        <div class="morning">
+                            <div class="time-title">الصباح</div>
+                            <ul class="exercise-list">
+                                <li class="exercise-item">
+                                    <div>
+                                        <span class="exercise-name">تمارين القوة</span>
+                                        <div class="exercise-details">ضغط، شد، بطن، قرفصاء (5 مجموعات لكل منها)</div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                                <li class="exercise-item">
+                                    <div>
+                                        <span class="exercise-name">تمارين اليدين والأصابع</span>
+                                        <div class="exercise-details">تمرين الضغط على كرة التنس (3 مجموعات × 20 عدة)</div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="evening">
+                            <div class="time-title">المساء</div>
+                            <ul class="exercise-list">
+                                <li class="exercise-item">
+                                    <span class="exercise-name">راحة</span>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الأربعاء -->
+                <div class="day-card">
+                    <div class="day-header">الأربعاء</div>
+                    <div class="day-content">
+                        <div class="morning">
+                            <div class="time-title">الصباح</div>
+                            <ul class="exercise-list">
+                                <li class="exercise-item">
+                                    <div>
+                                        <span class="exercise-name">الجري السريع</span>
+                                        <div class="exercise-details">سباقات 400م × 5 مع راحة 90 ثانية</div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="evening">
+                            <div class="time-title">المساء</div>
+                            <ul class="exercise-list">
+                                <li class="exercise-item">
+                                    <span class="exercise-name">تمارين الإطالة</span>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                                <li class="exercise-item">
+                                    <div>
+                                        <span class="exercise-name">تمارين اليدين والأصابع</span>
+                                        <div class="exercise-details">تمرين قبضة المعصم (3 مجموعات × 12 عدة)</div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الخميس -->
+                <div class="day-card rest-day">
+                    <div class="day-header">الخميس</div>
+                    <div class="day-content">
+                        <div class="morning">
+                            <div class="time-title">الصباح</div>
+                            <ul class="exercise-list">
+                                <li class="exercise-item">
+                                    <span class="exercise-name">راحة تامة أو سباحة خفيفة</span>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="evening">
+                            <div class="time-title">المساء</div>
+                            <ul class="exercise-list">
+                                <li class="exercise-item">
+                                    <span class="exercise-name">راحة</span>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        </div>
+                </div>
+
+                <!-- الجمعة -->
+                <div class="day-card">
+                    <div class="day-header">الجمعة</div>
+                    <div class="day-content">
+                        <div class="morning">
+                            <div class="time-title">الصباح</div>
+                            <ul class="exercise-list">
+                                <li class="exercise-item">
+                                    <div>
+                                        <span class="exercise-name">الجري الطويل</span>
+                                        <div class="exercise-details">5 كم بزمن أسرع من день الاثنين</div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="evening">
+                            <div class="time-title">المساء</div>
+                            <ul class="exercise-list">
+                                <li class="exercise-item">
+                                    <span class="exercise-name">تمارين الإطالة</span>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                                <li class="exercise-item">
+                                    <div>
+                                        <span class="exercise-name">تمارين اليدين والأصابع</span>
+                                        <div class="exercise-details">تمرين مقاومة الأصابع (3 مجموعات × 15 عدة)</div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <button class="complete-btn">✓</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- الأحد -->
-            <div class="day-card">
-                <div class="day-header">الأحد</div>
-                <div class="day-content">
-                    <div class="morning">
-                        <div class="time-title">الصباح</div>
-                        <ul class="exercise-list">
-                            <li class="exercise-item">
-                                <div>
-                                    <span class="exercise-name">الجري المتقطع</span>
-                                    <div class="exercise-details">20 دقيقة (1 دقيقة سريعة، 1 دقيقة مشي)</div>
-                                </div>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                        </ul>
+            <div class="progress-section">
+                <h2>تقدمي هذا الأسبوع</h2>
+                <div class="progress-stats">
+                    <div class="progress-stat">
+                        <h3>تمارين مكتملة</h3>
+                        <div class="progress-value" id="completedExercises">0/24</div>
                     </div>
-                    <div class="evening">
-                        <div class="time-title">المساء</div>
-                        <ul class="exercise-list">
-                            <li class="exercise-item">
-                                <span class="exercise-name">راحة</span>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                            <li class="exercise-item">
-                                <div>
-                                    <span class="exercise-name">تمارين اليدين والأصابع</span>
-                                    <div class="exercise-details">تمرين شد الإصبع (3 مجموعات × 10 عدة لكل يد)</div>
-                                </div>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                        </ul>
+                    <div class="progress-stat">
+                        <h3>نسبة الإنجاز</h3>
+                        <div class="progress-value" id="completionRate">0%</div>
+                    </div>
+                    <div class="progress-stat">
+                        <h3>أيام متتالية</h3>
+                        <div class="progress-value" id="streakDays">0</div>
                     </div>
                 </div>
             </div>
 
-            <!-- الاثنين -->
-            <div class="day-card">
-                <div class="day-header">الاثنين</div>
-                <div class="day-content">
-                    <div class="morning">
-                        <div class="time-title">الصباح</div>
-                        <ul class="exercise-list">
-                            <li class="exercise-item">
-                                <div>
-                                    <span class="exercise-name">الجري الطويل</span>
-                                    <div class="exercise-details">5 كم بزمن ثابت</div>
-                                </div>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                        </ul>
+            <div class="hand-exercises">
+                <h2>تمارين تقوية وتضخيم اليدين والأصابع</h2>
+                <div class="hand-exercise-grid">
+                    <div class="hand-exercise-item">
+                        <h3>تمرين قبضة اليد</h3>
+                        <p>استخدم أداة تقوية القبضة أو كرة مطاطية. اضغط بقوة لمدة 5 ثوانٍ ثم أطلق. 3 مجموعات × 15 عدة لكل يد.</p>
                     </div>
-                    <div class="evening">
-                        <div class="time-title">المساء</div>
-                        <ul class="exercise-list">
-                            <li class="exercise-item">
-                                <span class="exercise-name">تمارين الإطالة</span>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                        </ul>
+                    <div class="hand-exercise-item">
+                        <h3>تمرين شد الإصبع</h3>
+                        <p>استخدم رباط مطاطي حول الأصابع وافتحها ضد المقاومة. 3 مجموعات × 10 عدة لكل يد.</p>
+                    </div>
+                    <div class="hand-exercise-item">
+                        <h3>تمرين الضغط على كرة التنس</h3>
+                        <p>اضغط على كرة التنس بأطراف أصابعك. 3 مجموعات × 20 عدة لكل يد.</p>
+                    </div>
+                    <div class="hand-exercise-item">
+                        <h3>تمرين قبضة المعصم</h3>
+                        <p>أمسك دمبل خفيف ولف معصمك لأعلى ولأسفل. 3 مجموعات × 12 عدة لكل يد.</p>
+                    </div>
+                    <div class="hand-exercise-item">
+                        <h3>تمرين مقاومة الأصابع</h3>
+                        <p>استخدم أصابع اليد الأخرى لمقاومة حركة كل إصبع. 3 مجموعات × 15 عدة لكل إصبع.</p>
+                    </div>
+                    <div class="hand-exercise-item">
+                        <h3>تمرين تعليق الجسم</h3>
+                        <p>علق جسمك على بار لمدة 30-60 ثانية لتقوية قبضة اليد والأصابع.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- الثلاثاء -->
-            <div class="day-card">
-                <div class="day-header">الثلاثاء</div>
-                <div class="day-content">
-                    <div class="morning">
-                        <div class="time-title">الصباح</div>
-                        <ul class="exercise-list">
-                            <li class="exercise-item">
-                                <div>
-                                    <span class="exercise-name">تمارين القوة</span>
-                                    <div class="exercise-details">ضغط، شد، بطن، قرفصاء (5 مجموعات لكل منها)</div>
-                                </div>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                            <li class="exercise-item">
-                                <div>
-                                    <span class="exercise-name">تمارين اليدين والأصابع</span>
-                                    <div class="exercise-details">تمرين الضغط على كرة التنس (3 مجموعات × 20 عدة)</div>
-                                </div>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="evening">
-                        <div class="time-title">المساء</div>
-                        <ul class="exercise-list">
-                            <li class="exercise-item">
-                                <span class="exercise-name">راحة</span>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="achievements">
+                <h2>إنجازاتي</h2>
+                <div class="achievement-form">
+                    <input type="text" class="achievement-input" placeholder="أضف إنجازك الجديد هنا...">
+                    <button class="add-achievement">إضافة</button>
                 </div>
+                <ul class="achievements-list">
+                    <li class="achievement-item">
+                        <span>أكملت أول أسبوع تدريبي كامل</span>
+                        <button class="delete-achievement">×</button>
+                    </li>
+                    <li class="achievement-item">
+                        <span>حققت 20 ضغطة متتالية</span>
+                        <button class="delete-achievement">×</button>
+                    </li>
+                    <li class="achievement-item">
+                        <span>ركضت 5 كم بدون توقف</span>
+                        <button class="delete-achievement">×</button>
+                    </li>
+                </ul>
             </div>
 
-            <!-- الأربعاء -->
-            <div class="day-card">
-                <div class="day-header">الأربعاء</div>
-                <div class="day-content">
-                    <div class="morning">
-                        <div class="time-title">الصباح</div>
-                        <ul class="exercise-list">
-                            <li class="exercise-item">
-                                <div>
-                                    <span class="exercise-name">الجري السريع</span>
-                                    <div class="exercise-details">سباقات 400م × 5 مع راحة 90 ثانية</div>
-                                </div>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="evening">
-                        <div class="time-title">المساء</div>
-                        <ul class="exercise-list">
-                            <li class="exercise-item">
-                                <span class="exercise-name">تمارين الإطالة</span>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                            <li class="exercise-item">
-                                <div>
-                                    <span class="exercise-name">تمارين اليدين والأصابع</span>
-                                    <div class="exercise-details">تمرين قبضة المعصم (3 مجموعات × 12 عدة)</div>
-                                </div>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="tips-section">
+                <h2>نصائح مهمة جدًا للاختبار</h2>
+                <div class="tip-item">
+                    <strong>الجرى (اللفة):</strong> هو غالبًا أهم جزء في الاختبار. لا تبدأ بأقصى سرعة، بل احتفظ بخطوة ثابتة وسريعة من البداية حتى النهاية.
                 </div>
-            </div>
-
-            <!-- الخميس -->
-            <div class="day-card rest-day">
-                <div class="day-header">الخميس</div>
-                <div class="day-content">
-                    <div class="morning">
-                        <div class="time-title">الصباح</div>
-                        <ul class="exercise-list">
-                            <li class="exercise-item">
-                                <span class="exercise-name">راحة تامة أو سباحة خفيفة</span>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="evening">
-                        <div class="time-title">المساء</div>
-                        <ul class="exercise-list">
-                            <li class="exercise-item">
-                                <span class="exercise-name">راحة</span>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="tip-item">
+                    <strong>الضغط والبطن:</strong> في الاختبار، العدات يجب أن تكون كاملة وصحيحة (نزول كامل للصدر في الضغط، ومسك الركبتين في البطن). لا تهمل في دقة الحركة.
                 </div>
-            </div>
-
-            <!-- الجمعة -->
-            <div class="day-card">
-                <div class="day-header">الجمعة</div>
-                <div class="day-content">
-                    <div class="morning">
-                        <div class="time-title">الصباح</div>
-                        <ul class="exercise-list">
-                            <li class="exercise-item">
-                                <div>
-                                    <span class="exercise-name">الجري الطويل</span>
-                                    <div class="exercise-details">5 كم بزمن أسرع من يوم الاثنين</div>
-                                </div>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="evening">
-                        <div class="time-title">المساء</div>
-                        <ul class="exercise-list">
-                            <li class="exercise-item">
-                                <span class="exercise-name">تمارين الإطالة</span>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                            <li class="exercise-item">
-                                <div>
-                                    <span class="exercise-name">تمارين اليدين والأصابع</span>
-                                    <div class="exercise-details">تمرين مقاومة الأصابع (3 مجموعات × 15 عدة)</div>
-                                </div>
-                                <div class="exercise-actions">
-                                    <button class="complete-btn">✓</button>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                <div class="tip-item">
+                    <strong>السحب (الشد):</strong> إذا كان ضمن الاختبار، فهو فارق بين المقبول والمميز. ركز عليه.
+                </div>
+                <div class="tip-item">
+                    <strong>اليدان والأصابع:</strong> القبضة القوية مهمة للتمارين التي تتعلق بحمل الأوزان أو التسلق.
+                </div>
+                <div class="tip-item">
+                    <strong>التنفس:</strong> حافظ على تنفس منتظم خلال التمارين ولا تحبس أنفاسك.
+                </div>
+                <div class="tip-item">
+                    <strong>الاستشفاء:</strong> لا تهمل الراحة والتغذية المناسبة، فهما أساسيان لتحقيق التقدم.
                 </div>
             </div>
         </div>
 
-        <div class="progress-section">
-            <h2>تقدمي هذا الأسبوع</h2>
-            <div class="progress-stats">
-                <div class="progress-stat">
-                    <h3>تمارين مكتملة</h3>
-                    <div class="progress-value" id="completedExercises">0/24</div>
-                </div>
-                <div class="progress-stat">
-                    <h3>نسبة الإنجاز</h3>
-                    <div class="progress-value" id="completionRate">0%</div>
-                </div>
-                <div class="progress-stat">
-                    <h3>أيام متتالية</h3>
-                    <div class="progress-value" id="streakDays">0</div>
-                </div>
+        <div class="content-section" id="testosterone-plan">
+            <div class="testosterone-header">
+                <h2>خطة زيادة التستوستيرون الطبيعية</h2>
+                <p>برنامج متكامل لمدة 90 يومًا لتحسين شكل الوجه والجسم وزيادة الطاقة</p>
             </div>
-        </div>
 
-        <div class="hand-exercises">
-            <h2>تمارين تقوية وتضخيم اليدين والأصابع</h2>
-            <div class="hand-exercise-grid">
-                <div class="hand-exercise-item">
-                    <h3>تمرين قبضة اليد</h3>
-                    <p>استخدم أداة تقوية القبضة أو كرة مطاطية. اضغط بقوة لمدة 5 ثوانٍ ثم أطلق. 3 مجموعات × 15 عدة لكل يد.</p>
-                </div>
-                <div class="hand-exercise-item">
-                    <h3>تمرين شد الإصبع</h3>
-                    <p>استخدم رباط مطاطي حول الأصابع وافتحها ضد المقاومة. 3 مجموعات × 10 عدة لكل يد.</p>
-                </div>
-                <div class="hand-exercise-item">
-                    <h3>تمرين الضغط على كرة التنس</h3>
-                    <p>اضغط على كرة التنس بأطراف أصابعك. 3 مجموعات × 20 عدة لكل يد.</p>
-                </div>
-                <div class="hand-exercise-item">
-                    <h3>تمرين قبضة المعصم</h3>
-                    <p>أمسك دمبل خفيف ولف معصمك لأعلى ولأسفل. 3 مجموعات × 12 عدة لكل يد.</p>
-                </div>
-                <div class="hand-exercise-item">
-                    <h3>تمرين مقاومة الأصابع</h3>
-                    <p>استخدم أصابع اليد الأخرى لمقاومة حركة كل إصبع. 3 مجموعات × 15 عدة لكل إصبع.</p>
-                </div>
-                <div class="hand-exercise-item">
-                    <h3>تمرين تعليق الجسم</h3>
-                    <p>علق جسمك على بار لمدة 30-60 ثانية لتقوية قبضة اليد والأصابع.</p>
+            <div class="testosterone-container">
+                <h3>مقدمة</h3>
+                <p>هذه الخطة مصممة لزيادة هرمون التستوستيرون بشكل طبيعي من through تغييرات في نمط الحياة، التغذية، التمارين، والنوم. يجب استشارة الطبيب قبل البدء في أي برنامج جديد.</p>
+                
+                <div class="testosterone-warning">
+                    <strong>تحذير مهم:</strong> هذه الخطة للأشخاص الأصحاء فقط. استشر طبيبك قبل البدء، خاصة إذا كنت تعاني من أي مشاكل صحية.
                 </div>
             </div>
-        </div>
 
-        <div class="achievements">
-            <h2>إنجازاتي</h2>
-            <div class="achievement-form">
-                <input type="text" class="achievement-input" placeholder="أضف إنجازك الجديد هنا...">
-                <button class="add-achievement">إضافة</button>
+            <div class="testosterone-container">
+                <h3>الجدول الأسبوعي للتمارين</h3>
+                <table class="testosterone-table">
+                    <thead>
+                        <tr>
+                            <th>اليوم</th>
+                            <th>نوع التمرين</th>
+                            <th>المدة</th>
+                            <th>الشدة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>السبت</td>
+                            <td>تمارين المقاومة (الصدر، الكتف، الترايسبس)</td>
+                            <td>45-60 دقيقة</td>
+                            <td>عالية</td>
+                        </tr>
+                        <tr>
+                            <td>الأحد</td>
+                            <td>تمارين الكارديو (HIIT)</td>
+                            <td>20-30 دقيقة</td>
+                            <td>عالية</td>
+                        </tr>
+                        <tr>
+                            <td>الإثنين</td>
+                            <td>تمارين المقاومة (الظهر، البايسبس)</td>
+                            <td>45-60 دقيقة</td>
+                            <td>عالية</td>
+                        </tr>
+                        <tr>
+                            <td>الثلاثاء</td>
+                            <td>راحة أو تمارين خفيفة (يوجا/تمطية)</td>
+                            <td>30 دقيقة</td>
+                            <td>منخفضة</td>
+                        </tr>
+                        <tr>
+                            <td>الأربعاء</td>
+                            <td>تمارين المقاومة (الأرجل، الأكتاف)</td>
+                            <td>45-60 دقيقة</td>
+                            <td>عالية</td>
+                        </tr>
+                        <tr>
+                            <td>الخميس</td>
+                            <td>تمارين الكارديو (مشي سريع أو سباحة)</td>
+                            <td>30-40 دقيقة</td>
+                            <td>متوسطة</td>
+                        </tr>
+                        <tr>
+                            <td>الجمعة</td>
+                            <td>راحة كاملة</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <ul class="achievements-list">
-                <li class="achievement-item">
-                    <span>أكملت أول أسبوع تدريبي كامل</span>
-                    <button class="delete-achievement">×</button>
-                </li>
-                <li class="achievement-item">
-                    <span>حققت 20 ضغطة متتالية</span>
-                    <button class="delete-achievement">×</button>
-                </li>
-                <li class="achievement-item">
-                    <span>ركضت 5 كم بدون توقف</span>
-                    <button class="delete-achievement">×</button>
-                </li>
-            </ul>
-        </div>
 
-        <div class="tips-section">
-            <h2>نصائح مهمة جدًا للاختبار</h2>
-            <div class="tip-item">
-                <strong>الجرى (اللفة):</strong> هو غالبًا أهم جزء في الاختبار. لا تبدأ بأقصى سرعة، بل احتفظ بخطوة ثابتة وسريعة من البداية حتى النهاية.
+            <div class="testosterone-container">
+                <h3>النظام الغذائي اليومي</h3>
+                <div class="day-plan">
+                    <div class="testosterone-day-title">نومذج يومي للتغذية</div>
+                    
+                    <div class="testosterone-section">
+                        <h4>الفطور (7:00-8:00 صباحًا)</h4>
+                        <ul>
+                            <li>3 بيضات كاملة + 2 بياض بيض</li>
+                            <li>شريحة أفوكادو</li>
+                            <li>خضروات (سبانخ، فطر، طماطم)</li>
+                            <li>كوب شاي أخضر</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="testosterone-section">
+                        <h4>وجبة خفيفة (10:30 صباحًا)</h4>
+                        <ul>
+                            <li>حفنة من المكسرات (لوز، جوز)</li>
+                            <li>تفاحة أو موزة</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="testosterone-section">
+                        <h4>الغداء (1:00-2:00 ظهرًا)</h4>
+                        <ul>
+                            <li>200-250 جرام لحم أحمر أو دواجن أو سمك</li>
+                            <li>خضروات متنوعة (بروكلي، فاصوليا خضراء، خس)</li>
+                            <li>كربوهيدرات معقدة (أرز بني، بطاطا حلوة، كينوا)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="testosterone-section">
+                        <h4>وجبة ما قبل التمرين (4:00 عصرًا)</h4>
+                        <ul>
+                            <li>موزة أو تفاحة</li>
+                            <li>ملعقة بروتين</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="testosterone-section">
+                        <h4>وجبة بعد التمرين (6:00 مساءً)</h4>
+                        <ul>
+                            <li>40-50 جرام بروتين (صدر دجاج، سمك، لحم)</li>
+                            <li>كربوهيدرات سريعة الهضم (أرز أبيض، بطاطا)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="testosterone-section">
+                        <h4>العشاء (8:00-9:00 مساءً)</h4>
+                        <ul>
+                            <li>150-200 جرام بروتين (سمك، دجاج)</li>
+                            <li>خضروات خضراء</li>
+                            <li>دهون صحية (زيت زيتون، أفوكادو)</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="tip-item">
-                <strong>الضغط والبطن:</strong> في الاختبار، العدات يجب أن تكون كاملة وصحيحة (نزول كامل للصدر في الضغط، ومسك الركبتين في البطن). لا تهمل في دقة الحركة.
+
+            <div class="testosterone-container">
+                <h3>المكملات الغذائية المفيدة</h3>
+                <table class="testosterone-table">
+                    <thead>
+                        <tr>
+                            <th>المكمل</th>
+                            <th>الجرعة</th>
+                            <th>الوقت</th>
+                            <th>الفائدة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>الزنك</td>
+                            <td>30-50 مجم يومياً</td>
+                            <td>بعد الطعام</td>
+                            <td>يدعم إنتاج التستوستерون</td>
+                        </tr>
+                        <tr>
+                            <td>فيتامين د</td>
+                            <td>2000-5000 وحدة دولية</td>
+                            <td>عند الاستيقاظ</td>
+                            <td>يزيد من مستويات التستوستيرون</td>
+                        </tr>
+                        <tr>
+                            <td>المغنيسيوم</td>
+                            <td>400 مجم يومياً</td>
+                            <td>قبل النوم</td>
+                            <td>يحسن جودة النوم وهرمونات الجسم</td>
+                        </tr>
+                        <tr>
+                            <td>أوميغا-3</td>
+                            <td>1000-2000 مجم يومياً</td>
+                            <td>مع الطعام</td>
+                            <td>يقلل الالتهابات ويدعم الصحة الهرمونية</td>
+                        </tr>
+                        <tr>
+                            <td>فيتامين ب6</td>
+                            <td>50-100 مجم يومياً</td>
+                            <td>مع الطعام</td>
+                            <td>يدعم تكوين هرمونات الستيرويد</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="tip-item">
-                <strong>السحب (الشد):</strong> إذا كان ضمن الاختبار، فهو فارق بين المقبول والمميز. ركز عليه.
+
+            <div class="testosterone-container">
+                <h3>نصائح لتحسين جودة النوم</h3>
+                <ul>
+                    <li>النوم 7-9 ساعات كل ليلة</li>
+                    <li>النوم والاستيقاظ في نفس الوقت يومياً</li>
+                    <li>إبقاء غرفة النوم مظلمة وهادئة وباردة</li>
+                    <li>تجنب الأجهزة الإلكترونية قبل النوم بساعة</li>
+                    <li>تجنب الكافيين بعد الساعة 2 ظهراً</li>
+                    <li>ممارسة تمارين الاسترخاء قبل النوم</li>
+                </ul>
             </div>
-            <div class="tip-item">
-                <strong>اليدان والأصابع:</strong> القبضة القوية مهمة للتمارين التي تتعلق بحمل الأوزان أو التسلق.
+
+            <div class="testosterone-container">
+                <h3>تتبع التقدم</h3>
+                <table class="testosterone-table">
+                    <thead>
+                        <tr>
+                            <th>المقياس</th>
+                            <th>التردد</th>
+                            <th>الطريقة</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>الوزن</td>
+                            <td>أسبوعياً</td>
+                            <td>الميزان في الصباح بعد الاستيقاظ</td>
+                        </tr>
+                        <tr>
+                            <td>محيط الخصر</td>
+                            <td>أسبوعياً</td>
+                            <td>شريط قياس حول أضيق جزء</td>
+                        </tr>
+                        <tr>
+                            <td>مستوى الطاقة</td>
+                            <td>يومياً</td>
+                            <td>مقياس من 1 إلى 10</td>
+                        </tr>
+                        <tr>
+                            <td>قوة التمرين</td>
+                            <td>أسبوعياً</td>
+                            <td>تسجيل الأوزان المستخدمة</td>
+                        </tr>
+                        <tr>
+                            <td>مستويات التستوستيرون</td>
+                            <td>كل 3 أشهر</td>
+                            <td>فحص دم عند الطبيب</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="tip-item">
-                <strong>التنفس:</strong> حافظ على تنفس منتظم خلال التمارين ولا تحبس أنفاسك.
+
+            <div class="testosterone-container testosterone-tip">
+                <h3>نصائح إضافية لزيادة التستوستيرون</h3>
+                <ul>
+                    <li>تعرض للشمس يومياً لمدة 15-20 دقيقة</li>
+                    <li>تجنب الإجهاد المزمن ومارس تمارين الاسترخاء</li>
+                    <li>حافظ على وزن صحي وتجنب السمنة</li>
+                    <li>تجنب السموم البيئية ( البلاستيك، المبيدات)</li>
+                    <li>قلل من تناول السكريات والكربوهيدرات المكررة</li>
+                    <li>اشرب كميات كافية من الماء (3-4 لتر يومياً)</li>
+                </ul>
             </div>
-            <div class="tip-item">
-                <strong>الاستشفاء:</strong> لا تهمل الراحة والتغذية المناسبة، فهما أساسيان لتحقيق التقدم.
+
+            <div class="testosterone-container">
+                <h3>تنزيل الخطة</h3>
+                <p>يمكنك حفظ هذه الصفحة كملف PDF أو طباعتها للمراجعة اليومية:</p>
+                <button onclick="window.print()" class="testosterone-btn">طباعة الخطة</button>
+                <button onclick="location.reload()" class="testosterone-btn">تحديث الصفحة</button>
             </div>
         </div>
     </div>
+
+    <footer style="text-align: center; margin-top: 40px; color: #666; font-size: 0.9em; padding: 20px;">
+        <p>© 2023 خطة تضخيم العضلات وزيادة التستوستيرون الطبيعية. يجب استشارة الطبيب قبل البدء في أي برنامج جديد.</p>
+    </footer>
 
     <script>
         // متغيرات التطبيق
@@ -869,6 +1297,20 @@
             }
             
             updateProgress();
+
+            // إضافة مستمعي الأحداث لألسطوانات التبويب
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // إزالة النشاط من جميع الأسطوانات
+                    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                    
+                    // إضافة النشاط للأسطوانة المحددة
+                    this.classList.add('active');
+                    const target = this.getAttribute('data-target');
+                    document.getElementById(target).classList.add('active');
+                });
+            });
         });
 
         // حفظ التقدم عند الخروج
